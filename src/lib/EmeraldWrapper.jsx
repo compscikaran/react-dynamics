@@ -3,6 +3,7 @@ import { saveEmeraldTelemetry } from './service/telemetryService';
 import Telemetry from './service/Telemetry';
 import { EmeraldEvents } from './constants';
 import { useLocation } from 'react-router-dom';
+import EmeraldBoundary from './EmeraldBoundary';
 
 const withEmerald = (Component, componentName) => {
   return (props) => {
@@ -10,8 +11,8 @@ const withEmerald = (Component, componentName) => {
     const ref = useRef();
     const location = useLocation();
     useEffect(() => {
-      const obj = new Telemetry(componentName, EmeraldEvents.MOUNT, location.pathname);
-      saveEmeraldTelemetry(obj);
+      const mountTelemetry = new Telemetry(componentName, EmeraldEvents.MOUNT, location.pathname);
+      saveEmeraldTelemetry(mountTelemetry);
     }, []);
 
     const captureMouseOver = () => {
@@ -27,7 +28,9 @@ const withEmerald = (Component, componentName) => {
 
     return (
       <div onMouseOver={captureMouseOver} onClick={capctureMouseClick} ref={ref}>
-        <Component id={componentName} {...props} />
+        <EmeraldBoundary componentName={componentName}>
+          <Component id={componentName} {...props} />
+        </EmeraldBoundary>
       </div>
     )
   }
