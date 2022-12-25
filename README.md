@@ -7,7 +7,7 @@ I started my career mainly working on the backend with Java and we had a monitor
 ------------------------
 ## How the solution is designed
 
-![image](./design.png)
+![image](design.png)
 
 
 The basic idea is to allow the consuming application to setup collection of metrics in a generic way. The telemetry is then batched up into the browser storage and sent at regular intervals to a configurable application endpoint by a Service Worker.
@@ -18,7 +18,7 @@ The basic idea is to allow the consuming application to setup collection of metr
 1. Register the application with Emerald by calling below method in application's index file.
     
     ```js
-        registerEmerald('SampleApplication1');
+    registerEmerald('SampleApplication1');
     ```
 
 2. Use included HOC to wrap the components for which you would like to collect metrics
