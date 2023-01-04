@@ -1,8 +1,8 @@
 import React from 'react';
 import { BrowserRouter, Route,Routes } from 'react-router-dom';
-import Sample1 from './examples/Sample1';
-import Sample2 from './examples/Sample2';
-import Sample3 from './examples/Sample3';
+import Sample1 from './Sample1';
+import Sample2 from './Sample2';
+import Sample3 from './Sample3';
 
 const App = () => {
   return (

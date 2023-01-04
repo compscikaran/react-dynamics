@@ -1,4 +1,4 @@
 import withEmerald from "./EmeraldWrapper";
 import registerEmerald from "./service/registrationService";
-
-export { withEmerald, registerEmerald };
+import { EmeraldEvents } from "./constants";
+export { withEmerald, registerEmerald, EmeraldEvents };

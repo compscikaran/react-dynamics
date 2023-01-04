@@ -34,6 +34,12 @@ I started my career mainly working on the backend with Java and we had a monitor
 
     > public/emeraldWorker.js 
 
+4. Configure which events you want to be captured by HOC in index file
+
+    ```js
+    configureEmeraldEvents([EmeraldEvents.MOUNT, EmeraldEvents.ERROR]);
+    ```
+
 ----------------------------
 
 This project was proudly bootstrapped with [Create React App](https://github.com/facebook/create-react-app).

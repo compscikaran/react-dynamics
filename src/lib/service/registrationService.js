@@ -22,6 +22,22 @@ const registerApplication = (applicationName) => {
     }
 }
 
+export const configureEmeraldEvents = (events) => {
+    if(events.length > 0) {
+        localStorage.setItem('configuredEvents', events.join(';'));
+    }
+}
+
+export const isEventConfigured = (emeraldEvent) => {
+    const events = localStorage.getItem('configuredEvents') || '';
+    console.log(events);
+    if(events.includes(emeraldEvent)) {
+        return true;
+    } else {
+        return false;
+    }
+}
+
 const registerServiceWorker = () => {
     if('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
