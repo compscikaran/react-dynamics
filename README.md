@@ -8,7 +8,10 @@
 
 I started my career mainly working on the backend with Java and we had a monitoring tool called AppDynamics setup where I worked. This tool captured all kinds of metrics, errors, usage statistics etc which were very helpful in diagnosing issues. One day a light bulb went off in my head as to why we cannot have a simillar solution for Frontend apps which is lightweight and does not have performance impact.
 
-![design](/Emerald.png)
+<p>
+<img src="Emerald.png"/ alt="design">
+</p>
+
 
 ------------------------
 ## How to set it up
