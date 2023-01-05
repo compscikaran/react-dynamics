@@ -8,6 +8,10 @@
 
 I started my career mainly working on the backend with Java and we had a monitoring tool called AppDynamics setup where I worked. This tool captured all kinds of metrics, errors, usage statistics etc which were very helpful in diagnosing issues. One day a light bulb went off in my head as to why we cannot have a simillar solution for Frontend apps which is lightweight and does not have performance impact.
 
+
+![App architecture](https://i.ibb.co/JnZC5yr/Emerald.png)
+
+
 ------------------------
 ## How to set it up
 
@@ -33,6 +37,12 @@ I started my career mainly working on the backend with Java and we had a monitor
 3. Included Service Worker into your application's public folder.
 
     > public/emeraldWorker.js 
+
+4. Configure which events you want to be captured by HOC in index file
+
+    ```js
+    configureEmeraldEvents([EmeraldEvents.MOUNT, EmeraldEvents.ERROR]);
+    ```
 
 ----------------------------
 

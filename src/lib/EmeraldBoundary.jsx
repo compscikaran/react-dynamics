@@ -1,5 +1,6 @@
 import React, { Component } from 'react'
 import { EmeraldEvents } from './constants';
+import { isEventConfigured } from './service/registrationService';
 import Telemetry from './service/Telemetry';
 import { saveEmeraldTelemetry } from './service/telemetryService';
 
@@ -14,8 +15,10 @@ export default class EmeraldBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    const telemetry = new Telemetry(this.props.componentName, EmeraldEvents.ERROR, errorInfo.componentStack);
-    saveEmeraldTelemetry(telemetry);
+    if(isEventConfigured(EmeraldEvents.ERROR)) {
+      const telemetry = new Telemetry(this.props.componentName, EmeraldEvents.ERROR, errorInfo.componentStack);
+      saveEmeraldTelemetry(telemetry);
+    }
   }
 
   render() {

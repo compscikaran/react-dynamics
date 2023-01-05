@@ -4,6 +4,7 @@ import Telemetry from './service/Telemetry';
 import { EmeraldEvents } from './constants';
 import { useLocation } from 'react-router-dom';
 import EmeraldBoundary from './EmeraldBoundary';
+import { isEventConfigured } from './service/registrationService';
 
 const withEmerald = (Component, componentName) => {
   return (props) => {
@@ -11,19 +12,25 @@ const withEmerald = (Component, componentName) => {
     const ref = useRef();
     const location = useLocation();
     useEffect(() => {
-      const mountTelemetry = new Telemetry(componentName, EmeraldEvents.MOUNT, location.pathname);
-      saveEmeraldTelemetry(mountTelemetry);
+      if(isEventConfigured(EmeraldEvents.MOUNT)) {
+        const mountTelemetry = new Telemetry(componentName, EmeraldEvents.MOUNT, location.pathname);
+        saveEmeraldTelemetry(mountTelemetry);
+      }
     }, []);
 
     const captureMouseOver = () => {
-      const mouseOver = new Telemetry(componentName, EmeraldEvents.MOUSEOVER, location.pathname);
-      saveEmeraldTelemetry(mouseOver);
+      if(isEventConfigured(EmeraldEvents.MOUSEOVER)) {
+        const mouseOver = new Telemetry(componentName, EmeraldEvents.MOUSEOVER, location.pathname);
+        saveEmeraldTelemetry(mouseOver);
+      }
     }
 
     
     const capctureMouseClick = () => {
-      const mouseClick = new Telemetry(componentName, EmeraldEvents.MOUSECLICK, location.pathname);
-      saveEmeraldTelemetry(mouseClick);
+      if(isEventConfigured(EmeraldEvents.MOUSECLICK)) {
+        const mouseClick = new Telemetry(componentName, EmeraldEvents.MOUSECLICK, location.pathname);
+        saveEmeraldTelemetry(mouseClick);
+      }
     }
 
     return (

@@ -1,7 +1,7 @@
 import _ from "lodash";
 import localforage from "localforage";
 
-const registerEmerald = (applicationName) => {
+export const registerEmerald = (applicationName) => {
     registerApplication(applicationName);
     navigator.serviceWorker.getRegistrations().then(registrations => {
         if(registrations != undefined && registrations.length > 0) {
@@ -18,7 +18,24 @@ const registerEmerald = (applicationName) => {
 
 const registerApplication = (applicationName) => {
     if(!_.isEmpty(applicationName)) {
-        localforage.setItem('applicationName', applicationName);
+        const appChannel = new BroadcastChannel("application-name");
+        appChannel.postMessage(applicationName);
+        appChannel.close();
+    }
+}
+
+export const configureEmeraldEvents = (events) => {
+    if(events.length > 0) {
+        localStorage.setItem('configuredEvents', events.join(';'));
+    }
+}
+
+export const isEventConfigured = (emeraldEvent) => {
+    const events = localStorage.getItem('configuredEvents') || '';
+    if(events.includes(emeraldEvent)) {
+        return true;
+    } else {
+        return false;
     }
 }
 
@@ -33,4 +50,8 @@ const registerServiceWorker = () => {
     }
 }
 
-export default registerEmerald;
+export const configureEmeraldWorker = (apiUrl) => {
+    const apiChannel = new BroadcastChannel("api-url");
+    apiChannel.postMessage(apiUrl);
+    apiChannel.close();
+}
