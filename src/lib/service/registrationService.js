@@ -1,5 +1,22 @@
 import _ from "lodash";
-import localforage from "localforage";
+import localforage, { config } from "localforage";
+import { attachTelemetryToWindow } from "./telemetryService";
+
+export const configureEmerald = (configs) => {
+    console.log(configs)
+    if(configs.applicationName) {
+        registerEmerald(configs.applicationName);
+    }
+    if(configs.captureEvents) {
+        configureEmeraldEvents(configs.captureEvents);
+    }
+    if(config.apiUrl) {
+        configureEmeraldWorker(configs.apiUrl);
+    }
+    if(config.devConsole) {
+        configureEmeraldDevConsole();
+    }
+}
 
 export const registerEmerald = (applicationName) => {
     registerApplication(applicationName);
@@ -28,6 +45,10 @@ export const configureEmeraldEvents = (events) => {
     if(events.length > 0) {
         localStorage.setItem('configuredEvents', events.join(';'));
     }
+}
+
+export const configureEmeraldDevConsole = () => {
+    attachTelemetryToWindow();
 }
 
 export const isEventConfigured = (emeraldEvent) => {
