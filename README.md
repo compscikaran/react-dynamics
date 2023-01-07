@@ -15,13 +15,7 @@ I started my career mainly working on the backend with Java and we had a monitor
 ------------------------
 ## How to set it up
 
-1. Register the application with Emerald by calling below method in application's index file.
-    
-    ```js
-    registerEmerald('SampleApplication1');
-    ```
-
-2. Use included HOC to wrap the components for which you would like to collect metrics
+1. Use included HOC to wrap the components for which you would like to collect metrics
 
     ```js
     const Sample1 =  () => {
@@ -32,17 +26,26 @@ I started my career mainly working on the backend with Java and we had a monitor
 
     export default withEmerald(Sample1, 'sample1');
     ```
-    This HOC Allows the component to deposit the telemetry into the browser storage.
+    This HOC Allows the component to communicate with our telemetry capture services
 
-3. Included Service Worker into your application's public folder.
+2. Included Emerald Worker into your application's public folder.
 
     > public/emeraldWorker.js 
 
-4. Configure which events you want to be captured by HOC in index file
+    The worker is responsible for dispatching the telemetry to your backend
 
+3. Configure the application to use Emerald Toolkit by calling below method in application's index file.
+    
     ```js
-    configureEmeraldEvents([EmeraldEvents.MOUNT, EmeraldEvents.ERROR]);
+    configureEmerald({
+        applicationName: 'SampleApplication1',
+        captureEvents: [EmeraldEvents.MOUNT, EmeraldEvents.ERROR],
+        apiUrl: 'https://google/com',
+        devConsole: true
+    });
+
     ```
+
 
 ----------------------------
 

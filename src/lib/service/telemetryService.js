@@ -21,3 +21,20 @@ export const saveEmeraldTelemetry = (telemetry) => {
     
 }
 
+const getTelemetry = () => {
+    localforage.getItem('applicationName').then((appName) => {
+        if(appName == null) {
+            throw new Error("Application not yet registered. Please refer docs");
+        }
+        const telemetryKey = appName + 'Telemetry';
+        localforage.getItem(telemetryKey).then((val) => {
+            console.log(val);
+        });
+    });
+}
+
+export const attachTelemetryToWindow = () => {
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+        window.printTelemetry = getTelemetry;
+    }
+}
