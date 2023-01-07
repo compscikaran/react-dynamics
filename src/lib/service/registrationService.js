@@ -10,10 +10,10 @@ export const configureEmerald = (configs) => {
     if(configs.captureEvents) {
         configureEmeraldEvents(configs.captureEvents);
     }
-    if(config.apiUrl) {
+    if(configs.apiUrl) {
         configureEmeraldWorker(configs.apiUrl);
     }
-    if(config.devConsole) {
+    if(configs.devConsole) {
         configureEmeraldDevConsole();
     }
 }
