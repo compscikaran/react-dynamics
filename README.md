@@ -46,6 +46,12 @@ I started my career mainly working on the backend with Java and we had a monitor
 
     ```
 
+| Parameter      | Value |
+| ----------- | ----------- |
+| applicationName      | Unique app name used while capturing telemetry      |
+| captureEvents   | Which events should be captured at component level. e.g. EmeraldEvents.MOUNT, EmeraldEvents.ERROR      |
+| apiUrl | Backend URL where telemetry data is to be sent |
+| devConsole | Allows telemetry data to be printed in Chrome dev console |
 
 ----------------------------
 
