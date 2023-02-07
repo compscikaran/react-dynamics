@@ -9,7 +9,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 configureEmerald({
   applicationName: 'SampleApplication1',
-  captureEvents: [EmeraldEvents.MOUNT, EmeraldEvents.ERROR],
+  captureEvents: [EmeraldEvents.MOUNT, EmeraldEvents.ERROR, EmeraldEvents.MOUSECLICK],
   apiUrl: 'https://google/com',
   devConsole: true
 });
