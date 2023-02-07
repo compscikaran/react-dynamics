@@ -20,24 +20,13 @@ export const configureEmerald = (configs) => {
 
 export const registerEmerald = (applicationName) => {
     registerApplication(applicationName);
-    navigator.serviceWorker.getRegistrations().then(registrations => {
-        if(registrations != undefined && registrations.length > 0) {
-            for (let index = 0; index < registrations.length; index++) {
-                const element = registrations[index];
-                if(element.active.scriptURL.includes('emeraldWorker')) {
-                    return;    
-                }
-            }
-        }
-        registerServiceWorker();
-    });
+    registerServiceWorker();
 }
 
 const registerApplication = (applicationName) => {
     if(!_.isEmpty(applicationName)) {
-        const appChannel = new BroadcastChannel("application-name");
-        appChannel.postMessage(applicationName);
-        appChannel.close();
+        localStorage.setItem('applicationName', applicationName);
+        localforage.setItem('applicationName', applicationName);
     }
 }
 
@@ -72,7 +61,8 @@ const registerServiceWorker = () => {
 }
 
 export const configureEmeraldWorker = (apiUrl) => {
-    const apiChannel = new BroadcastChannel("api-url");
-    apiChannel.postMessage(apiUrl);
-    apiChannel.close();
+    if(!_.isEmpty(apiUrl)) {
+        localStorage.setItem('apiUrl', apiUrl);
+        localforage.setItem('apiUrl', apiUrl);
+    }
 }
