@@ -1,15 +1,12 @@
-# Project Emerald
+# React Dynamics
 
 
-![workflow](https://github.com/compscikaran/emerald-toolkit/actions/workflows/npm-publish.yml/badge.svg)
+![workflow](https://github.com/compscikaran/reactdynamics/actions/workflows/npm-publish.yml/badge.svg)
 
 
 ## How the idea came about
 
-I started my career mainly working on the backend with Java and we had a monitoring tool called AppDynamics setup where I worked. This tool captured all kinds of metrics, errors, usage statistics etc which were very helpful in diagnosing issues. One day a light bulb went off in my head as to why we cannot have a simillar solution for Frontend apps which is lightweight and does not have performance impact.
-
-
-![App architecture](https://i.ibb.co/JnZC5yr/Emerald.png)
+The idea is kind of is inspired by a monitoring tool called AppDynamics which is used for monitoring a Java applications and I thought why not have something simillar for React. This tool captured all kinds of metrics, errors, usage statistics etc which were very helpful in diagnosing issues. I also intend for the tool to be lightweight and not have much of a hit on application performance.
 
 
 ------------------------
@@ -24,22 +21,22 @@ I started my career mainly working on the backend with Java and we had a monitor
         )
     }
 
-    export default withEmerald(Sample1, 'sample1');
+    export default withDynamics(Sample1, 'sample1');
     ```
     This HOC Allows the component to communicate with our telemetry capture services
 
-2. Included Emerald Worker into your application's public folder.
+2. Include Service Worker into your application's public folder.
 
-    > public/emeraldWorker.js 
+    > public/dynamicsWorker.js 
 
     The worker is responsible for dispatching the telemetry to your backend
 
-3. Configure the application to use Emerald Toolkit by calling below method in application's index file.
+3. Configure the application to use ReactDynamics by calling below method in application's index file.
     
     ```js
-    configureEmerald({
+    configureAnalytics({
         applicationName: 'SampleApplication1',
-        captureEvents: [EmeraldEvents.MOUNT, EmeraldEvents.ERROR],
+        captureEvents: [DynamicEvents.MOUNT, DynamicEvents.ERROR],
         apiUrl: 'https://google/com',
         devConsole: true
     });
@@ -49,7 +46,7 @@ I started my career mainly working on the backend with Java and we had a monitor
 | Parameter      | Value |
 | ----------- | ----------- |
 | applicationName      | Unique app name used while capturing telemetry      |
-| captureEvents   | Which events should be captured at component level. e.g. EmeraldEvents.MOUNT, EmeraldEvents.ERROR      |
+| captureEvents   | Which events should be captured at component level. e.g. MOUNT, ERROR, MOUSECLICK      |
 | apiUrl | Backend URL where telemetry data is to be sent |
 | devConsole | Allows telemetry data to be printed in Chrome dev console |
 

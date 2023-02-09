@@ -2,7 +2,7 @@ import _ from "lodash";
 import localforage, { config } from "localforage";
 import { attachTelemetryToWindow } from "./telemetryService";
 
-export const configureEmerald = (configs) => {
+export const configureAnalytics = (configs) => {
     console.log(configs)
     if(configs.applicationName) {
         registerEmerald(configs.applicationName);
@@ -53,7 +53,7 @@ const registerServiceWorker = () => {
     if('serviceWorker' in navigator) {
         window.addEventListener('load', () => {
             navigator.serviceWorker
-                .register('./emeraldWorker.js')
+                .register('./dynamicsWorker.js')
                 .then(reg => console.log('Service Worker registered'))
                 .catch(error => console.log('Service worker failed: ' + error));
         });
