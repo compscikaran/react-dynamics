@@ -1,11 +1,7 @@
-import withEmerald from "./EmeraldWrapper";
-import { registerEmerald, configureEmeraldEvents, configureEmeraldWorker, configureEmeraldDevConsole, configureEmerald } from "./service/registrationService";
-import { EmeraldEvents } from "./constants";
+import withDynamics from "./EmeraldWrapper";
+import { configureAnalytics } from "./service/registrationService";
+import { DynamicEvents } from "./constants";
 export { 
-    withEmerald, 
-    registerEmerald, 
-    EmeraldEvents, 
-    configureEmeraldEvents, 
-    configureEmeraldWorker, 
-    configureEmeraldDevConsole,
-    configureEmerald };
+    withDynamics, 
+    DynamicEvents, 
+    configureAnalytics };

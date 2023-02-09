@@ -1,10 +1,10 @@
 import React, { Component } from 'react'
-import { EmeraldEvents } from './constants';
+import { DynamicEvents } from './constants';
 import { isEventConfigured } from './service/registrationService';
 import Telemetry from './service/Telemetry';
 import { saveEmeraldTelemetry } from './service/telemetryService';
 
-export default class EmeraldBoundary extends Component {
+export default class DynamicsBoundary extends Component {
 
   state = {
     hasError: false,
@@ -15,8 +15,8 @@ export default class EmeraldBoundary extends Component {
   }
 
   componentDidCatch(error, errorInfo) {
-    if(isEventConfigured(EmeraldEvents.ERROR)) {
-      const telemetry = new Telemetry(this.props.componentName, EmeraldEvents.ERROR, errorInfo.componentStack);
+    if(isEventConfigured(DynamicEvents.ERROR)) {
+      const telemetry = new Telemetry(this.props.componentName, DynamicEvents.ERROR, errorInfo.componentStack);
       saveEmeraldTelemetry(telemetry);
     }
   }

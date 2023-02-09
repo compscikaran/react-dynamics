@@ -1,5 +1,5 @@
 import React from 'react';
-import withEmerald from "../lib/EmeraldWrapper";
+import withDynamics from "../lib/DynamicsWrapper";
 
 const Sample1 = () => {
   return (
@@ -7,4 +7,4 @@ const Sample1 = () => {
   )
 }
 
-export default withEmerald(Sample1, 'sample1');
+export default withDynamics(Sample1, 'sample1');

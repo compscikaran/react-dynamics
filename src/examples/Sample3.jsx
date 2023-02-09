@@ -1,6 +1,6 @@
 import _ from 'lodash';
 import React, { lazy, Suspense, useState } from 'react'
-import withEmerald from "../lib/EmeraldWrapper";
+import withDynamics from "../lib/DynamicsWrapper";
 
 const Sample3 = () => {
 
@@ -25,4 +25,4 @@ const Sample3 = () => {
   )
 }
 
-export default withEmerald(Sample3, 'component3');
+export default withDynamics(Sample3, 'component3');
