@@ -6,7 +6,7 @@
 
 ## How the idea came about
 
-The idea is kind of is inspired by a monitoring tool called AppDynamics which is used for monitoring a Java applications and I thought why not have something simillar for React. This tool captured all kinds of metrics, errors, usage statistics etc which were very helpful in diagnosing issues. I also intend for the tool to be lightweight and not have much of a hit on application performance.
+The idea is kind of is inspired by a monitoring tool called AppDynamics which is used for monitoring Java applications and I thought why not have something simillar for React. This tool captures metrics such as errors, mounts, mouse clicks etc which could be helpful for diagnosing errors and inform product decisions. The tool is lightweight and will not have much impact on application performance.
 
 
 ------------------------
