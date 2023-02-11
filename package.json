@@ -1,6 +1,6 @@
 {
   "name": "react-dynamics-agent",
-  "version": "1.0.0",
+  "version": "1.1.0",
   "private": false,
   "license": "gpl-2.0",
   "keywords": [
@@ -27,7 +27,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "NODE_ENV=production babel src/lib --out-dir dist --copy-files",
+    "build": "NODE_ENV=production babel src/lib --out-file dist/react.dynamics.agent.min.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -52,6 +52,7 @@
   "devDependencies": {
     "@babel/cli": "^7.20.7",
     "@babel/core": "^7.20.7",
-    "@babel/preset-env": "^7.20.2"
+    "@babel/preset-env": "^7.20.2",
+    "babel-preset-minify": "^0.5.2"
   }
 }
