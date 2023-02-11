@@ -13,6 +13,7 @@
       "corejs": "3.6.5"
        }
    ],
+      "minify",
       "@babel/preset-react"
    ]
    }
