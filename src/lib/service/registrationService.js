@@ -92,7 +92,7 @@ const recordFingerPrint = () => {
     if(existingId == null) {
         const fpPromise = FingerprintJS.load()
         fpPromise.then(fp => fp.get()).then(result =>  {
-            const hash = result.visitorId;
+            const hash = MD5(result.visitorId).toString();
             localStorage.setItem(LOCAL_STORAGE_UNIQ_ID, hash)
         });
     }
