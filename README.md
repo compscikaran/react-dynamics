@@ -42,7 +42,8 @@ The idea is kind of is inspired by a monitoring tool called AppDynamics which is
         applicationName: 'SampleApplication1',
         captureEvents: [DynamicEvents.MOUNT, DynamicEvents.ERROR],
         apiUrl: 'https://google/com',
-        devConsole: true
+        devConsole: true,
+        captureAnonymizedId: true
     });
 
     ```

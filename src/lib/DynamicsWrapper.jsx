@@ -16,6 +16,10 @@ const withDynamics = (Component, componentName) => {
         const mountTelemetry = new Telemetry(componentName, DynamicEvents.MOUNT, location.pathname);
         saveEmeraldTelemetry(mountTelemetry);
       }
+      return () => {
+        const unmountTelemetry = new Telemetry(componentName, DynamicEvents.UNMOUNT, location.pathname);
+        saveEmeraldTelemetry(unmountTelemetry);
+      }
     }, []);
 
     const captureMouseOver = () => {

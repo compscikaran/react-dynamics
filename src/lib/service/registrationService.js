@@ -1,6 +1,9 @@
 import _ from "lodash";
 import localforage, { config } from "localforage";
 import { attachTelemetryToWindow } from "./telemetryService";
+import MD5 from "crypto-js/md5";
+import FingerprintJS  from "@fingerprintjs/fingerprintjs";
+import { LOCAL_STORAGE_API_URL, LOCAL_STORAGE_APP_NAME, LOCAL_STORAGE_TELEMETRY, LOCAL_STORAGE_UNIQ_ID } from "../constants";
 
 export const configureAnalytics = (configs) => {
     console.log(configs)
@@ -16,6 +19,9 @@ export const configureAnalytics = (configs) => {
     if(configs.devConsole) {
         configureEmeraldDevConsole();
     }
+    if(configs.captureAnonymizedId) {
+        recordFingerPrint();
+    }
 }
 
 export const registerEmerald = (applicationName) => {
@@ -25,14 +31,14 @@ export const registerEmerald = (applicationName) => {
 
 const registerApplication = (applicationName) => {
     if(!_.isEmpty(applicationName)) {
-        localStorage.setItem('applicationName', applicationName);
-        localforage.setItem('applicationName', applicationName);
+        localStorage.setItem(LOCAL_STORAGE_APP_NAME, applicationName);
+        localforage.setItem(LOCAL_STORAGE_APP_NAME, applicationName);
     }
 }
 
 export const configureEmeraldEvents = (events) => {
     if(events.length > 0) {
-        localStorage.setItem('configuredEvents', events.join(';'));
+        localStorage.setItem(LOCAL_STORAGE_TELEMETRY, events.join(';'));
     }
 }
 
@@ -41,7 +47,7 @@ export const configureEmeraldDevConsole = () => {
 }
 
 export const isEventConfigured = (emeraldEvent) => {
-    const events = localStorage.getItem('configuredEvents') || '';
+    const events = localStorage.getItem(LOCAL_STORAGE_TELEMETRY) || '';
     if(events.includes(emeraldEvent)) {
         return true;
     } else {
@@ -62,7 +68,32 @@ const registerServiceWorker = () => {
 
 export const configureEmeraldWorker = (apiUrl) => {
     if(!_.isEmpty(apiUrl)) {
-        localStorage.setItem('apiUrl', apiUrl);
-        localforage.setItem('apiUrl', apiUrl);
+        localStorage.setItem(LOCAL_STORAGE_API_URL, apiUrl);
+        localforage.setItem(LOCAL_STORAGE_API_URL, apiUrl);
+    }
+}
+
+// Deprecated
+const recordIpAddressHash = () => {
+    const existingId = localStorage.getItem(LOCAL_STORAGE_UNIQ_ID)
+    if(existingId == null) {
+        fetch('https://api.db-ip.com/v2/free/self').then(data => {
+                return data.json();
+            }).then(content => {
+                const ip = content.ipAddress
+                const hash = MD5(ip).toString();
+                localStorage.setItem(LOCAL_STORAGE_UNIQ_ID, hash);
+        });
+    }
+}
+
+const recordFingerPrint = () => {
+    const existingId = localStorage.getItem(LOCAL_STORAGE_UNIQ_ID)
+    if(existingId == null) {
+        const fpPromise = FingerprintJS.load()
+        fpPromise.then(fp => fp.get()).then(result =>  {
+            const hash = MD5(result.visitorId).toString();
+            localStorage.setItem(LOCAL_STORAGE_UNIQ_ID, hash)
+        });
     }
 }

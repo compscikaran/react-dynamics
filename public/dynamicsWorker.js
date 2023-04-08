@@ -2,7 +2,7 @@ importScripts('https://cdnjs.cloudflare.com/ajax/libs/localforage/1.10.0/localfo
 
 self.addEventListener('activate', e => {
     console.log('Service Worker activated');
-    setInterval(fetchTelemetry, 10000);
+    setInterval(fetchTelemetry, 5000);
 });
 
 const fetchTelemetry = () => {

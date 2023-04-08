@@ -10,7 +10,8 @@ configureAnalytics({
   applicationName: 'SampleApplication1',
   captureEvents: [DynamicEvents.MOUNT, DynamicEvents.ERROR, DynamicEvents.MOUSECLICK],
   apiUrl: 'https://google/com',
-  devConsole: true
+  devConsole: true,
+  captureAnonymizedId: true
 });
 
 root.render(
