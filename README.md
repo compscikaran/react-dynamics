@@ -6,9 +6,17 @@
 
 ## How the idea came about
 
-The idea is kind of is inspired by a monitoring tool called AppDynamics which is used for monitoring Java applications and I thought why not have something simillar for React. This tool captures metrics such as errors, mounts, mouse clicks etc which could be helpful for diagnosing errors and inform product decisions. The tool is lightweight and will not have much impact on application performance.
+The idea is kind of is inspired by a monitoring tool called AppDynamics which is used for monitoring Java applications, the tool captures metrics such as errors, mounts, mouse clicks etc which could be helpful for diagnosing errors and inform product decisions. The tool is lightweight and will not have much impact on application performance.
 
-![Emerald](https://user-images.githubusercontent.com/15171039/230698828-801ba4e8-f1d3-4bba-ab47-6ef103f3d83b.png)
+## What is ReactDynamics
+
+Here is some documentation - https://github.com/compscikaran/react-dynamics/wiki
+
+Key Features -
+1. Built around components so granularity at which data is captured is fully controlled. It can be configured at page level, sections or even individual fields
+2. Stores telemetry in the browser itself hence backend calls are not required for each and every event being captured in the system
+3. Captures lifecycle events such as mounting, unmounting which can be used for performance analysis
+4. Captures error stacktraces using Error Boundary which can be used for debugging
 
 ------------------------
 ## How to set it up
@@ -41,20 +49,10 @@ The idea is kind of is inspired by a monitoring tool called AppDynamics which is
     configureAnalytics({
         applicationName: 'SampleApplication1',
         captureEvents: [DynamicEvents.MOUNT, DynamicEvents.ERROR],
-        apiUrl: 'https://google/com',
-        devConsole: true,
         captureAnonymizedId: true
     });
 
     ```
-
-| Parameter      | Value |
-| ----------- | ----------- |
-| applicationName      | Unique app name used while capturing telemetry      |
-| captureEvents   | Which events should be captured at component level. e.g. MOUNT, ERROR, MOUSECLICK      |
-| apiUrl | Backend URL where telemetry data is to be sent |
-| devConsole | Allows telemetry data to be printed in Chrome dev console |
-| captureAnonymizedId | Adds a unique encrypted identifier based on user's machine details to Telemetry objects |
 
 ----------------------------
 
