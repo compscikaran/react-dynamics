@@ -1,7 +1,7 @@
 # React Dynamics
 
 
-![workflow](https://github.com/compscikaran/react-dynamics/actions/workflows/npm-package.yml/badge.svg)
+![workflow](https://github.com/compscikaran/react-dynamics/actions/workflows/ci-build.yml/badge.svg)
 
 
 ## How the idea came about
