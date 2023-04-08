@@ -54,6 +54,7 @@ The idea is kind of is inspired by a monitoring tool called AppDynamics which is
 | captureEvents   | Which events should be captured at component level. e.g. MOUNT, ERROR, MOUSECLICK      |
 | apiUrl | Backend URL where telemetry data is to be sent |
 | devConsole | Allows telemetry data to be printed in Chrome dev console |
+| captureAnonymizedId | Adds a unique encrypted identifier based on user's machine details to Telemetry objects |
 
 ----------------------------
 
