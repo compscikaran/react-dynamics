@@ -2,6 +2,7 @@ import _ from "lodash";
 import localforage, { config } from "localforage";
 import { attachTelemetryToWindow } from "./telemetryService";
 import MD5 from "crypto-js/md5";
+import FingerprintJS  from "@fingerprintjs/fingerprintjs";
 import { LOCAL_STORAGE_API_URL, LOCAL_STORAGE_APP_NAME, LOCAL_STORAGE_TELEMETRY, LOCAL_STORAGE_UNIQ_ID } from "../constants";
 
 export const configureAnalytics = (configs) => {
@@ -19,7 +20,7 @@ export const configureAnalytics = (configs) => {
         configureEmeraldDevConsole();
     }
     if(configs.captureAnonymizedId) {
-        recordIpAddressHash();
+        recordFingerPrint();
     }
 }
 
@@ -72,6 +73,7 @@ export const configureEmeraldWorker = (apiUrl) => {
     }
 }
 
+// Deprecated
 const recordIpAddressHash = () => {
     const existingId = localStorage.getItem(LOCAL_STORAGE_UNIQ_ID)
     if(existingId == null) {
@@ -81,6 +83,17 @@ const recordIpAddressHash = () => {
                 const ip = content.ipAddress
                 const hash = MD5(ip).toString();
                 localStorage.setItem(LOCAL_STORAGE_UNIQ_ID, hash);
+        });
+    }
+}
+
+const recordFingerPrint = () => {
+    const existingId = localStorage.getItem(LOCAL_STORAGE_UNIQ_ID)
+    if(existingId == null) {
+        const fpPromise = FingerprintJS.load()
+        fpPromise.then(fp => fp.get()).then(result =>  {
+            const hash = result.visitorId;
+            localStorage.setItem(LOCAL_STORAGE_UNIQ_ID, hash)
         });
     }
 }
