@@ -8,6 +8,7 @@
 
 The idea is kind of is inspired by a monitoring tool called AppDynamics which is used for monitoring Java applications and I thought why not have something simillar for React. This tool captures metrics such as errors, mounts, mouse clicks etc which could be helpful for diagnosing errors and inform product decisions. The tool is lightweight and will not have much impact on application performance.
 
+![Emerald](https://user-images.githubusercontent.com/15171039/230698828-801ba4e8-f1d3-4bba-ab47-6ef103f3d83b.png)
 
 ------------------------
 ## How to set it up
