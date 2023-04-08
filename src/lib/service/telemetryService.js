@@ -32,6 +32,13 @@ const getTelemetry = () => {
     });
 }
 
+export const retrieveTelemetry = async () => {
+    const appName = await localforage.getItem(LOCAL_STORAGE_APP_NAME);
+    const telemetryKey = appName + TELEMETRY_KEY_SUFFIX;
+    const data = await localforage.getItem(telemetryKey);
+    return data;
+}
+
 export const attachTelemetryToWindow = () => {
     if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
         window.printTelemetry = getTelemetry;
