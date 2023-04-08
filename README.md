@@ -18,7 +18,6 @@ Key Features -
 3. Captures lifecycle events such as mounting, unmounting which can be used for performance analysis
 4. Captures error stacktraces using Error Boundary which can be used for debugging
 
-------------------------
 ## How to set it up
 
 1. Install the agent library
