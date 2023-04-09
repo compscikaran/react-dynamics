@@ -1,6 +1,6 @@
 import { render } from '@testing-library/react';
 import App from '../examples/App';
-import { LOCAL_STORAGE_API_URL, LOCAL_STORAGE_APP_NAME } from '../lib/constants';
+import { LOCAL_STORAGE_API_URL, LOCAL_STORAGE_APP_NAME, LOCAL_STORAGE_UNIQ_ID } from '../lib/constants';
 import { setupDynamics } from './common';
 
 describe('Configuration works', () => {
@@ -20,5 +20,10 @@ describe('Configuration works', () => {
 
     test('Telemetry is available in Dev Console', () => {
       expect(window.printTelemetry).toBeUndefined();
+    });
+
+    test('Unique ID to be set ', () => {
+      const uniqueId = localStorage.getItem(LOCAL_STORAGE_UNIQ_ID);
+      expect(uniqueId).toBeDefined();
     });
 });
