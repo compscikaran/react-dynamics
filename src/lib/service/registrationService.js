@@ -1,14 +1,15 @@
 import _ from "lodash";
 import localforage, { config } from "localforage";
-import { attachTelemetryToWindow } from "./telemetryService";
 import MD5 from "crypto-js/md5";
 import FingerprintJS  from "@fingerprintjs/fingerprintjs";
 import { LOCAL_STORAGE_API_URL, LOCAL_STORAGE_APP_NAME, LOCAL_STORAGE_TELEMETRY, LOCAL_STORAGE_UNIQ_ID } from "../constants";
+import { retrieveTelemetry } from "./telemetryService";
 
+// Master method for configuring various aspects of dynamics
 export const configureAnalytics = (configs) => {
-    console.log(configs)
     if(configs.applicationName) {
-        registerEmerald(configs.applicationName);
+        registerApplication(configs.applicationName);
+        registerServiceWorker();
     }
     if(configs.captureEvents) {
         configureEmeraldEvents(configs.captureEvents);
@@ -17,16 +18,11 @@ export const configureAnalytics = (configs) => {
         configureEmeraldWorker(configs.apiUrl);
     }
     if(configs.devConsole) {
-        configureEmeraldDevConsole();
+        attachTelemetryToWindow();
     }
     if(configs.captureAnonymizedId) {
         recordFingerPrint();
     }
-}
-
-export const registerEmerald = (applicationName) => {
-    registerApplication(applicationName);
-    registerServiceWorker();
 }
 
 const registerApplication = (applicationName) => {
@@ -40,10 +36,6 @@ export const configureEmeraldEvents = (events) => {
     if(events.length > 0) {
         localStorage.setItem(LOCAL_STORAGE_TELEMETRY, events.join(';'));
     }
-}
-
-export const configureEmeraldDevConsole = () => {
-    attachTelemetryToWindow();
 }
 
 export const isEventConfigured = (emeraldEvent) => {
@@ -73,20 +65,6 @@ export const configureEmeraldWorker = (apiUrl) => {
     }
 }
 
-// Deprecated
-const recordIpAddressHash = () => {
-    const existingId = localStorage.getItem(LOCAL_STORAGE_UNIQ_ID)
-    if(existingId == null) {
-        fetch('https://api.db-ip.com/v2/free/self').then(data => {
-                return data.json();
-            }).then(content => {
-                const ip = content.ipAddress
-                const hash = MD5(ip).toString();
-                localStorage.setItem(LOCAL_STORAGE_UNIQ_ID, hash);
-        });
-    }
-}
-
 const recordFingerPrint = () => {
     const existingId = localStorage.getItem(LOCAL_STORAGE_UNIQ_ID)
     if(existingId == null) {
@@ -95,5 +73,11 @@ const recordFingerPrint = () => {
             const hash = MD5(result.visitorId).toString();
             localStorage.setItem(LOCAL_STORAGE_UNIQ_ID, hash)
         });
+    }
+}
+
+export const attachTelemetryToWindow = () => {
+    if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
+        window.printTelemetry = retrieveTelemetry;
     }
 }

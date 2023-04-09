@@ -5,17 +5,17 @@ import { retrieveTelemetry } from '../lib/service/telemetryService';
 import App from '../examples/App';
 import { setupDynamics } from './common';
 
-describe('Telemetry captures Click event', () => {
+describe('Telemetry captures Hover event', () => {
     setupDynamics();
     render(<App/>);
 
     fireEvent.click(screen.getByText('location 1'));
 
-    fireEvent.click(screen.getByText('This is Sample Component 1'));
+    fireEvent.mouseOver(screen.getByText('This is Sample Component 1'));
 
-    test('Click event is captured', async () => {
+    test('Hover event is captured', async () => {
         const data = await retrieveTelemetry();
-        const mouseEventPresent = data.filter(x => x.event == DynamicEvents.MOUSECLICK);
-        expect(mouseEventPresent.length).toBeGreaterThan(0);
+        const hoverEventPresent = data.filter(x => x.event == DynamicEvents.MOUSEOVER);
+        expect(hoverEventPresent.length).toBeGreaterThan(0);
     });
 });

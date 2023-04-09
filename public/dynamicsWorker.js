@@ -2,19 +2,34 @@ importScripts('https://cdnjs.cloudflare.com/ajax/libs/localforage/1.10.0/localfo
 
 self.addEventListener('activate', e => {
     console.log('Service Worker activated');
-    setInterval(fetchTelemetry, 5000);
+    setInterval(runFetch, 5000);
 });
 
-const fetchTelemetry = () => {
-    localforage.getItem('applicationName').then((appName) => {
-        if(appName == null) {
-            console.log('Application not registered yet');
-            // return;
+const runFetch = () => {
+    fetchTelemetry();
+}
+
+const fetchTelemetry = async () => {
+    
+    // Get Application Unique name
+    const appName = await localforage.getItem('applicationName');
+
+    const data = [];
+    const keys = [];
+
+    // Fetch data from Indexed DB
+    await localforage.iterate((value, key, iterationNumber) => {
+        if(key.startsWith(appName)) {
+            data.push(value);
+            keys.push(key);        
         }
-        const telemetryKey =  appName + 'Telemetry';
-        localforage.getItem(telemetryKey).then((val) => {
-            console.log(val);
-            localforage.removeItem(telemetryKey);
-        });
     });
+
+    console.log(data);
+    // Write Logic here to send data to External System e.g. via REST API
+
+    // Cleanup data from Indexed DB
+    for (const element of keys) {
+        await localforage.removeItem(element);
+    }
 }
