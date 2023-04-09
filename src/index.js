@@ -8,7 +8,7 @@ const root = ReactDOM.createRoot(document.getElementById('root'));
 
 configureAnalytics({
   applicationName: 'SampleApplication1',
-  captureEvents: [DynamicEvents.MOUNT, DynamicEvents.ERROR, DynamicEvents.MOUSECLICK],
+  captureEvents: [DynamicEvents.MOUNT, DynamicEvents.ERROR, DynamicEvents.MOUSECLICK, DynamicEvents.MOUSEOVER],
   apiUrl: 'https://google/com',
   devConsole: true,
   captureAnonymizedId: true

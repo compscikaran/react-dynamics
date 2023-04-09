@@ -5,7 +5,7 @@ import { retrieveTelemetry } from '../lib/service/telemetryService';
 import App from '../examples/App';
 import { setupDynamics } from './common';
 
-describe('Configuration works', () => {
+describe('Telemetry captures Errors', () => {
     setupDynamics();
     render(<App/>);
 
