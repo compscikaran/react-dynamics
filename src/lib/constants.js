@@ -3,7 +3,8 @@ export const DynamicEvents = {
     UNMOUNT: 'unmount',
     MOUSECLICK: 'mouse-click',
     MOUSEOVER: 'mouse-over',
-    ERROR: 'error'
+    ERROR: 'error',
+    REDUX_ACTION: 'redux_action'
 }
 
 export const LOCAL_STORAGE_API_URL = 'apiUrl';
