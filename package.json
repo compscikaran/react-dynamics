@@ -40,7 +40,7 @@
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "NODE_ENV=production babel src/lib --out-file dist/react.dynamics.agent.min.js",
+    "build": "NODE_ENV=production babel --extensions \".ts,.tsx\" src/lib --out-file dist/react.dynamics.agent.min.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -66,6 +66,7 @@
     "@babel/cli": "^7.20.7",
     "@babel/core": "^7.20.7",
     "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.21.5",
     "@testing-library/react": "^14.0.0",
     "babel-preset-minify": "^0.5.2",
     "history": "^5.3.0"

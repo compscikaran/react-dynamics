@@ -1,7 +1,9 @@
 {
     "compilerOptions": {
+      "baseUrl": "src",
       "target": "es5",
-      "module": "commonjs",
+      "module": "ESNext",
+      "moduleResolution": "node",
       "jsx": "react",
       "outDir": "./dist",
       "strict": true,
