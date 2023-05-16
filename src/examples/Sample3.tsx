@@ -2,10 +2,15 @@ import _ from 'lodash';
 import React, { lazy, Suspense, useEffect, useState } from 'react'
 import withDynamics from "../lib/DynamicsWrapper";
 
+
+type TestInput = {
+  hello: string;
+}
+
 const Sample3 = () => {
 
   const [x, setX] = useState(false);
-  const testMethod = (param) => {
+  const testMethod = (param: TestInput) => {
     throw new Error("Hello");
   }
 
