@@ -17,6 +17,15 @@
   "dependencies": {
     "@babel/polyfill": "^7.12.1",
     "@fingerprintjs/fingerprintjs": "^3.4.0",
+    "@types/crypto-js": "^4.1.1",
+    "@types/fingerprintjs": "^0.5.28",
+    "@types/jest": "^29.5.1",
+    "@types/lodash": "^4.14.194",
+    "@types/node": "^20.1.5",
+    "@types/react": "^18.2.6",
+    "@types/react-dom": "^18.2.4",
+    "@types/react-router": "^5.1.20",
+    "@types/react-router-dom": "^5.3.3",
     "crypto-js": "^4.1.1",
     "localforage": "^1.10.0",
     "lodash": "^4.17.21",
@@ -26,11 +35,12 @@
     "react-router-dom": "^6.6.1",
     "react-scripts": "5.0.1",
     "redux": "^4.2.1",
+    "typescript": "^3.2.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
     "start": "react-scripts start",
-    "build": "NODE_ENV=production babel src/lib --out-file dist/react.dynamics.agent.min.js",
+    "build": "NODE_ENV=production babel --extensions \".ts,.tsx\" src/lib --out-file dist/react.dynamics.agent.min.js",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
   },
@@ -56,6 +66,7 @@
     "@babel/cli": "^7.20.7",
     "@babel/core": "^7.20.7",
     "@babel/preset-env": "^7.20.2",
+    "@babel/preset-typescript": "^7.21.5",
     "@testing-library/react": "^14.0.0",
     "babel-preset-minify": "^0.5.2",
     "history": "^5.3.0"

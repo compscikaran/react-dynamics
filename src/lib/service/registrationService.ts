@@ -1,12 +1,13 @@
 import _ from "lodash";
 import localforage, { config } from "localforage";
 import MD5 from "crypto-js/md5";
-import FingerprintJS  from "@fingerprintjs/fingerprintjs";
+import FingerprintJS, { GetResult }  from "@fingerprintjs/fingerprintjs";
 import { LOCAL_STORAGE_API_URL, LOCAL_STORAGE_APP_NAME, LOCAL_STORAGE_TELEMETRY, LOCAL_STORAGE_UNIQ_ID } from "../constants";
 import { retrieveTelemetry } from "./telemetryService";
+import { DynamicsConfiguration } from "./DynamicsConfiguration";
 
 // Master method for configuring various aspects of dynamics
-export const configureAnalytics = (configs) => {
+export const configureAnalytics = (configs: DynamicsConfiguration) => {
     if(configs.applicationName) {
         registerApplication(configs.applicationName);
         registerServiceWorker();
@@ -25,20 +26,20 @@ export const configureAnalytics = (configs) => {
     }
 }
 
-const registerApplication = (applicationName) => {
+const registerApplication = (applicationName: string) => {
     if(!_.isEmpty(applicationName)) {
         localStorage.setItem(LOCAL_STORAGE_APP_NAME, applicationName);
         localforage.setItem(LOCAL_STORAGE_APP_NAME, applicationName);
     }
 }
 
-export const configureEmeraldEvents = (events) => {
+export const configureEmeraldEvents = (events: string[]) => {
     if(events.length > 0) {
         localStorage.setItem(LOCAL_STORAGE_TELEMETRY, events.join(';'));
     }
 }
 
-export const isEventConfigured = (emeraldEvent) => {
+export const isEventConfigured = (emeraldEvent: string) => {
     const events = localStorage.getItem(LOCAL_STORAGE_TELEMETRY) || '';
     if(events.includes(emeraldEvent)) {
         return true;
@@ -58,7 +59,7 @@ const registerServiceWorker = () => {
     }
 }
 
-export const configureEmeraldWorker = (apiUrl) => {
+export const configureEmeraldWorker = (apiUrl: string) => {
     if(!_.isEmpty(apiUrl)) {
         localStorage.setItem(LOCAL_STORAGE_API_URL, apiUrl);
         localforage.setItem(LOCAL_STORAGE_API_URL, apiUrl);
@@ -69,7 +70,7 @@ const recordFingerPrint = () => {
     const existingId = localStorage.getItem(LOCAL_STORAGE_UNIQ_ID)
     if(existingId == null) {
         const fpPromise = FingerprintJS.load()
-        fpPromise.then(fp => fp.get()).then(result =>  {
+        fpPromise.then(fp => fp.get()).then((result:GetResult) =>  {
             const hash = MD5(result.visitorId).toString();
             localStorage.setItem(LOCAL_STORAGE_UNIQ_ID, hash)
         });
@@ -78,6 +79,6 @@ const recordFingerPrint = () => {
 
 export const attachTelemetryToWindow = () => {
     if (!process.env.NODE_ENV || process.env.NODE_ENV === 'development') {
-        window.printTelemetry = retrieveTelemetry;
+        (window as any).printTelemetry = retrieveTelemetry;
     }
 }
