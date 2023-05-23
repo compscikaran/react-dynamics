@@ -1,19 +1,12 @@
 import { LOCAL_STORAGE_UNIQ_ID } from "../constants";
 
-class DynamicsTelemetry {
-
-    componentName: string;
-    event: string;
-    eventTimestamp: string;
-    url: string;
-    uniqueIdentifier: string;
-
-    constructor(componentName: string, event: string, url: string) {
+class Telemetry {
+    constructor(componentName, event, url) {
         this.componentName = componentName;
         this.event = event;
         this.eventTimestamp = new Date().toUTCString();
         this.url = url;
-        this.uniqueIdentifier = localStorage.getItem(LOCAL_STORAGE_UNIQ_ID) || '';
+        this.uniqueIdentifier = localStorage.getItem(LOCAL_STORAGE_UNIQ_ID);
     }
 
     toString() {
@@ -22,4 +15,4 @@ class DynamicsTelemetry {
     }
 }
 
-export default DynamicsTelemetry;
+export default Telemetry;
