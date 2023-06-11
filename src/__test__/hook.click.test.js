@@ -5,13 +5,13 @@ import { retrieveTelemetry } from '../lib/service/telemetryService';
 import App from '../examples/App';
 import { setupDynamics } from './common';
 
-describe('Telemetry captures Click event', () => {
+describe('Hook captures Click event', () => {
     setupDynamics();
     render(<App/>);
 
-    fireEvent.click(screen.getByText('location 1'));
+    fireEvent.click(screen.getByText('location 4'));
 
-    fireEvent.click(screen.getByText('This is Sample Component 1'));
+    fireEvent.click(screen.getByText('This is Sample Component 4'));
 
     test('Click event is captured', async () => {
         const data = await retrieveTelemetry();

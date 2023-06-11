@@ -5,11 +5,11 @@ import { retrieveTelemetry } from '../lib/service/telemetryService';
 import App from '../examples/App';
 import { setupDynamics } from './common';
 
-describe('Telemetry captures Mount event', () => {
+describe('Hook captures Mount event', () => {
     setupDynamics();
     render(<App/>);
 
-    fireEvent.click(screen.getByText('location 1'));
+    fireEvent.click(screen.getByText('location 4'));
 
     test('Mount event is captured', async () => {
         const data = await retrieveTelemetry();

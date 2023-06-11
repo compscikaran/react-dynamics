@@ -1,6 +1,6 @@
-import _ from 'lodash';
+import _ from 'lodash'
 import React, { lazy, Suspense, useEffect, useState } from 'react'
-import withDynamics from "../lib/DynamicsWrapper";
+import withDynamics from "../lib/DynamicsWrapper"
 
 
 type TestInput = {
@@ -11,12 +11,12 @@ const Sample3 = () => {
 
   const [x, setX] = useState(false);
   const testMethod = (param: TestInput) => {
-    throw new Error("Hello");
+    throw new Error("Hello")
   }
 
   useEffect(() => {
-    setX(true);
-  }, []);
+    setX(true)
+  }, [])
 
   return (
     <Suspense>
@@ -29,4 +29,4 @@ const Sample3 = () => {
   )
 }
 
-export default withDynamics(Sample3, 'component3');
+export default withDynamics(Sample3, 'sample3')

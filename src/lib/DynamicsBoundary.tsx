@@ -1,8 +1,8 @@
 import React, { Component, ErrorInfo, ReactNode } from 'react'
-import { DynamicEvents } from './constants';
-import { isEventConfigured } from './service/registrationService';
-import Telemetry from './service/DynamicsTelemetry';
-import { saveEmeraldTelemetry } from './service/telemetryService';
+import { DynamicEvents } from './constants'
+import { isEventConfigured } from './service/registrationService'
+import Telemetry from './service/DynamicsTelemetry'
+import { saveEmeraldTelemetry } from './service/telemetryService'
 
 type ComponentProps = {
   componentName: string;
@@ -20,13 +20,13 @@ export default class DynamicsBoundary extends React.Component<ComponentProps, Co
   }
 
   static getDerivedStateFromError(error: Error) {
-    return { hasError: true };
+    return { hasError: true }
   }
 
   componentDidCatch(error: Error, errorInfo: ErrorInfo) {
     if(isEventConfigured(DynamicEvents.ERROR)) {
-      const telemetry = new Telemetry(this.props.componentName, DynamicEvents.ERROR, errorInfo.componentStack);
-      saveEmeraldTelemetry(telemetry);
+      const telemetry = new Telemetry(this.props.componentName, DynamicEvents.ERROR, errorInfo.componentStack)
+      saveEmeraldTelemetry(telemetry)
     }
   }
 
@@ -34,6 +34,6 @@ export default class DynamicsBoundary extends React.Component<ComponentProps, Co
     if(this.state.hasError) {
         return <></>
     }
-    return this.props.children;
+    return this.props.children
   }
 }

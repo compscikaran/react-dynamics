@@ -1,5 +1,5 @@
 import React from 'react';
-import withDynamics from "../lib/DynamicsWrapper";
+import withDynamics from "../lib/DynamicsWrapper"
 
 const Sample2 = () => {
   return (
@@ -7,4 +7,4 @@ const Sample2 = () => {
   )
 }
 
-export default withDynamics(Sample2, 'sample2');
+export default withDynamics(Sample2, 'sample2')

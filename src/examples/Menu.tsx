@@ -13,6 +13,9 @@ const Menu = () => {
       <li>
         <Link to="/component3">location 3</Link>
       </li>
+      <li>
+        <Link to="/component4">location 4</Link>
+      </li>
     </ul>
   )
 }

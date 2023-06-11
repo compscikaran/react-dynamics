@@ -5,7 +5,7 @@ import { retrieveTelemetry } from '../lib/service/telemetryService';
 import App from '../examples/App';
 import { setupDynamics } from './common';
 
-describe('Telemetry captures Hover event', () => {
+describe('Wrapper captures Hover event', () => {
     setupDynamics();
     render(<App/>);
 
