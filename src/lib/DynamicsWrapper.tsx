@@ -1,40 +1,31 @@
 import React, { ComponentType, useEffect, useRef } from 'react'
-import { saveEmeraldTelemetry } from './service/telemetryService';
-import DynamicsTelemetry from './service/DynamicsTelemetry';
-import { DynamicEvents } from './constants';
-import { useLocation } from 'react-router-dom';
-import DynamicsBoundary from './DynamicsBoundary';
-import { isEventConfigured } from './service/registrationService';
+import { saveEmeraldTelemetry } from './service/telemetryService'
+import DynamicsTelemetry from './service/DynamicsTelemetry'
+import { DynamicEvents } from './constants'
+import { useLocation } from 'react-router-dom'
+import DynamicsBoundary from './DynamicsBoundary'
+import { isEventConfigured } from './service/registrationService'
+import { useEffectTelemetry } from './useEffectTelemetry'
 
 const withDynamics = <T extends object>(InputComponent: ComponentType<T>, componentName: string) => {
   return (props: T) => {
 
-    const ref = useRef<HTMLDivElement>(null);
-    const location = useLocation();
-    
-    useEffect(() => {
-      if(isEventConfigured(DynamicEvents.MOUNT)) {
-        const mountTelemetry = new DynamicsTelemetry(componentName, DynamicEvents.MOUNT, location.pathname);
-        saveEmeraldTelemetry(mountTelemetry);
-      }
-      return () => {
-        const unmountTelemetry = new DynamicsTelemetry(componentName, DynamicEvents.UNMOUNT, location.pathname);
-        saveEmeraldTelemetry(unmountTelemetry);
-      }
-    }, []);
+    const ref = useRef<HTMLDivElement>(null)
+    const location = useLocation()
+    useEffectTelemetry(componentName, location)
 
     const captureMouseOver = () => {
       if(isEventConfigured(DynamicEvents.MOUSEOVER)) {
-        const mouseOver = new DynamicsTelemetry(componentName, DynamicEvents.MOUSEOVER, location.pathname);
-        saveEmeraldTelemetry(mouseOver);
+        const mouseOver = new DynamicsTelemetry(componentName, DynamicEvents.MOUSEOVER, location.pathname)
+        saveEmeraldTelemetry(mouseOver)
       }
     }
 
     
     const capctureMouseClick = () => {
       if(isEventConfigured(DynamicEvents.MOUSECLICK)) {
-        const mouseClick = new DynamicsTelemetry(componentName, DynamicEvents.MOUSECLICK, location.pathname);
-        saveEmeraldTelemetry(mouseClick);
+        const mouseClick = new DynamicsTelemetry(componentName, DynamicEvents.MOUSECLICK, location.pathname)
+        saveEmeraldTelemetry(mouseClick)
       }
     }
 
@@ -48,4 +39,4 @@ const withDynamics = <T extends object>(InputComponent: ComponentType<T>, compon
   }
 }
 
-export default withDynamics;
+export default withDynamics
